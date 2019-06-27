@@ -15,6 +15,7 @@ class DockingStation
 
   def release_bike
     fail 'No bikes available' unless !@bikes.empty?
+
     @bikes.pop
   end
 
@@ -28,6 +29,7 @@ class DockingStation
 
   def dock(bike)
     fail "Docking Station full" unless !full?
+    report_broken if bike.broken?
     @bikes << bike
     bike
   end
