@@ -8,7 +8,8 @@ describe DockingStation do
     it 'releases a bike' do
         bike = Bike.new
         subject.dock(bike)
-        expect(subject.release_bike).to eq bike
+        subject.release_bike
+        expect(subject.bikes).to eq []
       end
 
       it 'raises an error when there are no bikes available' do
@@ -20,8 +21,8 @@ describe DockingStation do
         broken_bike = Bike.new
         broken_bike.report_broken
         subject.dock(broken_bike)
-        p broken_bike
-        expect { subject.bikes }. to eq [broken_bike]
+        subject.release_bike
+        expect(subject.bikes).to eq [broken_bike]
       end
 
     end
