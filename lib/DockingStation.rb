@@ -15,8 +15,11 @@ class DockingStation
 
   def release_bike
     fail 'No bikes available' unless !@bikes.empty?
-    @bikes.each_with_index do |bike, index|
-      @bikes.delete_at(index) unless bike.broken == true
+    @bikes.each_with_index do |bike1, index|
+      if bike1.broken == false
+        @bikes.delete_at(index)
+        return bike1
+      end
     end
   end
 
@@ -32,6 +35,7 @@ class DockingStation
     fail "Docking Station full" unless !full?
     puts "Bike is broken" if bike.broken == true
     @bikes << bike
+    return bike
   end
 
 end
